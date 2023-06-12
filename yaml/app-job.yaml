@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: archiving-data-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: archiving-data
+          image: postgres:latest
+          command: ["/bin/sh", "-c", "psql -c 'COPY (SELECT * FROM table_name) TO '/data/table_name.csv' DELIMITER ',' CSV HEADER;'"]
+      restartPolicy: Never
+  backoffLimit: 4

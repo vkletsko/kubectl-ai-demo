@@ -1,0 +1,15 @@
+apiVersion: batch/v2beta1
+kind: CronJob
+metadata:
+  name: hello-world
+spec:
+  schedule: "0 9 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello-world
+            image: ubuntu
+            command: ["echo 'HELLO WORLD'"]
+          restartPolicy: OnFailure
